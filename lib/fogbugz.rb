@@ -1,6 +1,6 @@
-require_relative 'ruby-fogbugz/adapters/http/typhoeus'
-require_relative 'ruby-fogbugz/adapters/xml/cracker'
-require_relative 'ruby-fogbugz/interface'
+require_relative 'ruby_fogbugz/adapters/http/typhoeus'
+require_relative 'ruby_fogbugz/adapters/xml/cracker'
+require_relative 'ruby_fogbugz/interface'
 
 module Fogbugz
   class << self

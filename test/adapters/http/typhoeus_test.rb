@@ -1,5 +1,5 @@
 require_relative '../../test_helper.rb'
-require 'ruby-fogbugz/adapters/http/typhoeus'
+require 'ruby_fogbugz/adapters/http/typhoeus'
 
 class Typhoeuser < FogTest
   test '#request should order the params right' do

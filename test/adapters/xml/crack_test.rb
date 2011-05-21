@@ -1,5 +1,5 @@
 require_relative '../../test_helper.rb'
-require 'ruby-fogbugz/adapters/xml/cracker'
+require 'ruby_fogbugz/adapters/xml/cracker'
 
 class Cracker < FogTest
   test 'should parse XML and get rid of the response namespace' do

@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "ruby-fogbugz/version"
+require "ruby_fogbugz/version"
 
 Gem::Specification.new do |s|
   s.name        = "ruby-fogbugz"
