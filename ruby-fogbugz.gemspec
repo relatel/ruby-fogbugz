@@ -4,7 +4,7 @@ require "ruby-fogbugz/version"
 
 Gem::Specification.new do |s|
   s.name        = "ruby-fogbugz"
-  s.version     = Ruby::Fogbugz::VERSION
+  s.version     = Fogbugz::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Simon Hørup Eskildsen"]
   s.email       = ["sirup@sirupsen.com"]
