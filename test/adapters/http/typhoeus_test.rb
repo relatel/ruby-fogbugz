@@ -1,4 +1,4 @@
-require_relative '../../test_helper.rb'
+require 'test_helper'
 require 'ruby_fogbugz/adapters/http/typhoeus'
 
 class Typhoeuser < FogTest
