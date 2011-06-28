@@ -17,3 +17,5 @@ All Fogbugz API requests require a token. Thus `#authenticate` must be called on
     fogbugz = Fogbugz::Interface.new(:email => 'my@email.com', :password => 'seekrit', :uri => 'http://company.fogbugz.com')
     fogbugz.authenticate # token is not automatically attached to every future requests
     fogbugz.command(:listPeople)
+
+[fad]:http://fogbugz.stackexchange.com/fogbugz-xml-api
