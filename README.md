@@ -14,8 +14,12 @@ That leaves `cmd` as the first argument to 'Fogbugz#command', the second argumen
 
 All Fogbugz API requests require a token. Thus `#authenticate` must be called on the instance before `#command`'s are sent.
 
-    fogbugz = Fogbugz::Interface.new(:email => 'my@email.com', :password => 'seekrit', :uri => 'http://company.fogbugz.com')
+    require 'rubygems'
+    require 'fogbugz'
+    require 'pp'
+
+    fogbugz = Fogbugz::Interface.new(:email => 'my@email.com', :password => 'seekrit', :uri => 'https://company.fogbugz.com')
     fogbugz.authenticate # token is not automatically attached to every future requests
-    fogbugz.command(:listPeople)
+    pp fogbugz.command(:listPeople)
 
 [fad]:http://fogbugz.stackexchange.com/fogbugz-xml-api
