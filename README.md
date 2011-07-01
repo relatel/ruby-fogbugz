@@ -24,9 +24,9 @@ Returns your parsed XML:
 {"description"=>"All open cases assigned to Simon Eskildsen", "cases"=>{"case"=>[{"ixBug"=>"185", "operations"=>"edit,assign,resolve,email,remind"}, {"ixBug"=>"268", "operations"=>"edit,assign,resolve,email,remind"}], "count"=>"13"}}
 ```
 
-As you see, `ruby-fogbugz` is without magic.
+As you see, `ruby-fogbugz` is without magic and leaves most to the user.
 
-`cmd` is the first argument to 'Fogbugz#command', the second argument is a `Hash` of additional GET arguments to specify the request further. You can see available `cmd`'s and arguments at the [Fogbugz API documentation][fad].
+`cmd` is the first argument to `Fogbugz#command`, the second argument being a `Hash` of additional GET arguments to specify the request further. You can see available `cmd`'s and arguments at the [Fogbugz API documentation][fad].
 
 All Fogbugz API requests require a token. Thus `#authenticate` must be called on the `ruby-fogbugz` instance before `#command`'s are sent:
 
