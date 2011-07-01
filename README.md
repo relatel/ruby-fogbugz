@@ -7,10 +7,7 @@ A very simple wrapper for the Fogbugz API. It won't give you fancy classes for e
     gem install ruby-fogbugz
 
 ```ruby
-["mri-1.9,2", "mri-1.8.7", "rbx-1.2.4", "rbx-2.0.0", "jruby-1.6.2"].all? do |implementation|
-  implementation.works?
-end
-
+["mri-1.9,2", "mri-1.8.7", "rbx-1.2.4", "rbx-2.0.0", "jruby-1.6.2"].all? { |implementation| implementation.works? }
 # => true
 ```
 
