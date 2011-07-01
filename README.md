@@ -1,25 +1,43 @@
 # ruby-fogbugz
 
-Ruby-fogbugz is a very simple wrapper for the Fogbugz API. The Fogbugz API works by sending HTTP GET parameters to the API where `cmd` invokes a Fogbugz method, e.g. `cmd=listProjects` to get a list of all projects.
+A very simple wrapper for the Fogbugz API. It won't give you fancy classes for everything, it'll simply aid you in sending the API requests, parsing the returned XML finally retuning you a Hash.
 
-An example of a request sent to the Fogbugz API to list all projects:
+# Installation
 
-    ?cmd=search&ixAssignedTo=2 # all cases associated to the user with ID of 2 in Fogbugz
+    gem install ruby-fogbugz
 
-In ruby-fogbugz that would be:
+# Usage
 
-    fogbugz.command(:listProjects, :ixAssignedTo => 2)
+The Fogbugz API works by sending HTTP GET parameters to the API where the GET parameter `cmd` invokes a Fogbugz method, e.g. `cmd=listProjects` to get a list of all projects, `cmd`s then accept further arguments, such as listing all cases assigned to a specific person:
 
-That leaves `cmd` as the first argument to 'Fogbugz#command', the second argument is a `Hash` of additional GET arguments to specify the request further. You can see available `cmd`'s and arguments at the [Fogbugz API documentation][fad].
+    cmd=search&ixAssignedTo=2 # list all cases associated to the user with ID of 2 in Fogbugz
 
-All Fogbugz API requests require a token. Thus `#authenticate` must be called on the instance before `#command`'s are sent.
+In `ruby-fogbugz` that request would be:
 
-    require 'rubygems'
-    require 'fogbugz'
-    require 'pp'
+```ruby
+fogbugz.command(:search, :ixAssignedTo => 2)
+```
 
-    fogbugz = Fogbugz::Interface.new(:email => 'my@email.com', :password => 'seekrit', :uri => 'https://company.fogbugz.com')
-    fogbugz.authenticate # token is not automatically attached to every future requests
-    pp fogbugz.command(:listPeople)
+Returns your parsed XML:
+
+```ruby
+{"description"=>"All open cases assigned to Simon Eskildsen", "cases"=>{"case"=>[{"ixBug"=>"185", "operations"=>"edit,assign,resolve,email,remind"}, {"ixBug"=>"268", "operations"=>"edit,assign,resolve,email,remind"}], "count"=>"13"}}
+```
+
+As you see, `ruby-fogbugz` is without magic.
+
+`cmd` is the first argument to 'Fogbugz#command', the second argument is a `Hash` of additional GET arguments to specify the request further. You can see available `cmd`'s and arguments at the [Fogbugz API documentation][fad].
+
+All Fogbugz API requests require a token. Thus `#authenticate` must be called on the `ruby-fogbugz` instance before `#command`'s are sent:
+
+```ruby
+require 'rubygems'
+require 'fogbugz'
+require 'pp'
+
+fogbugz = Fogbugz::Interface.new(:email => 'my@email.com', :password => 'seekrit', :uri => 'https://company.fogbugz.com') # remember to use https!
+fogbugz.authenticate # token is not automatically attached to every future requests
+pp fogbugz.command(:listPeople)
+```
 
 [fad]:http://fogbugz.stackexchange.com/fogbugz-xml-api
