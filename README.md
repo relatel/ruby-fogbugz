@@ -6,6 +6,8 @@ A very simple wrapper for the Fogbugz API. It won't give you fancy classes for e
 
     gem install ruby-fogbugz
 
+Tested working on: `mri-1.9,2`, `mri-1.8.7`, `rbx-1.2.4`, `rbx-2.0.0`, `jruby-1.6.2`
+
 # Usage
 
 The Fogbugz API works by sending HTTP GET parameters to the API where the GET parameter `cmd` invokes a Fogbugz method, e.g. `cmd=listProjects` to get a list of all projects, `cmd`s then accept further arguments, such as listing all cases assigned to a specific person:
@@ -21,7 +23,17 @@ fogbugz.command(:search, :ixAssignedTo => 2)
 Returns your parsed XML:
 
 ```ruby
-{"description"=>"All open cases assigned to Simon Eskildsen", "cases"=>{"case"=>[{"ixBug"=>"185", "operations"=>"edit,assign,resolve,email,remind"}, {"ixBug"=>"268", "operations"=>"edit,assign,resolve,email,remind"}], "count"=>"13"}}
+{
+  "description"=>"All open cases assigned to Simon Eskildsen",
+  "cases" => {
+    "case"=> [
+      {"ixBug"=>"143", "operations"=>"edit,assign,resolve,email,remind"},
+      {"ixBug"=>"185", "operations"=>"edit,assign,resolve,email,remind"},
+      {"ixBug"=>"209", "operations"=>"edit,assign,resolve,email,remind"},
+      {"ixBug"=>"283", "operations"=>"edit,assign,resolve,email,remind"}
+    ], "count"=>"13"
+  }
+}
 ```
 
 As you see, `ruby-fogbugz` is without magic and leaves most to the user.
