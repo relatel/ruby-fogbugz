@@ -30,10 +30,12 @@ Returns your parsed XML:
   "description"=>"All open cases assigned to Simon Eskildsen",
   "cases" => {
     "case"=> [
-    {"sTitle"=>"Server API", "sStatus"=>"Active",}
-      {"ixBug"=>"143", "sTitle"=>"Write ruby-fogbugz documentation", "sStatus"=>"active", "operations"=>"edit,assign,resolve,email,remind"},
-      {"ixBug"=>"146", "sTitle"=>"Tame a unicorn", "sStatus"=>"active", "operations"=>"edit,assign,resolve,email,remind"},
-      {"ixBug"=>"152", "sTitle"=>"Hug a walrus", "sStatus"=>"active", "operations"=>"edit,assign,resolve,email,remind"},
+      {"ixBug"=>"143", "sTitle"=>"Write ruby-fogbugz documentation", 
+      "sStatus"=>"active", "operations"=>"edit,assign,resolve,email,remind"},
+      {"ixBug"=>"146", "sTitle"=>"Tame a unicorn", "sStatus"=>"active", 
+      "operations"=>"edit,assign,resolve,email,remind"},
+      {"ixBug"=>"152", "sTitle"=>"Hug a walrus", "sStatus"=>"active", 
+      "operations"=>"edit,assign,resolve,email,remind"},
     ], "count"=>"13"
   }
 }
