@@ -15,7 +15,7 @@ A very simple wrapper for the Fogbugz API. It won't give you fancy classes for e
 
 The Fogbugz API works by sending HTTP GET parameters to the API where the GET parameter `cmd` invokes a Fogbugz method, e.g. `cmd=listProjects` to get a list of all projects, `cmd`s then accept further arguments, such as listing all cases assigned to a specific person:
 
-    cmd=search&ixAssignedTo=2 # list all cases associated to the user with ID of 2 in Fogbugz
+    cmd=search&ixAssignedTo=2&cols=sTitle,sStatus # list all cases associated to the user with ID of 2 in Fogbugz
 
 In `ruby-fogbugz` that request would be:
 
