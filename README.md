@@ -31,9 +31,9 @@ Returns your parsed XML:
   "cases" => {
     "case"=> [
     {"sTitle"=>"Server API", "sStatus"=>"Active",}
-      {"ixBug"=>"143", "sTitle" => "Write some ruby-fogbugz documentation", "sStatus => "active", operations"=>"edit,assign,resolve,email,remind"},
-      {"ixBug"=>"146", "sTitle" => "Tame a unicorn", "sStatus => "active", operations"=>"edit,assign,resolve,email,remind"},
-      {"ixBug"=>"152", "sTitle" => "Hug a walrus", "sStatus => "active", operations"=>"edit,assign,resolve,email,remind"},
+      {"ixBug"=>"143", "sTitle"=>"Write some ruby-fogbugz documentation", "sStatus=>"active", "operations"=>"edit,assign,resolve,email,remind"},
+      {"ixBug"=>"146", "sTitle"=>"Tame a unicorn", "sStatus=>"active", "operations"=>"edit,assign,resolve,email,remind"},
+      {"ixBug"=>"152", "sTitle"=>"Hug a walrus", "sStatus=>"active", "operations"=>"edit,assign,resolve,email,remind"},
     ], "count"=>"13"
   }
 }
@@ -56,3 +56,7 @@ pp fogbugz.command(:listPeople)
 ```
 
 [fad]:http://fogbugz.stackexchange.com/fogbugz-xml-api
+
+# License
+
+`ruby-fogbugz` is released under the MIT license.
