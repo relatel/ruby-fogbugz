@@ -20,7 +20,7 @@ The Fogbugz API works by sending HTTP GET parameters to the API where the GET pa
 In `ruby-fogbugz` that request would be:
 
 ```ruby
-fogbugz.command(:search, :ixAssignedTo => 2)
+fogbugz.command(:search, :ixAssignedTo => 2, :cols => "sTitle,sStatus")
 ```
 
 Returns your parsed XML:
@@ -30,10 +30,10 @@ Returns your parsed XML:
   "description"=>"All open cases assigned to Simon Eskildsen",
   "cases" => {
     "case"=> [
-      {"ixBug"=>"143", "operations"=>"edit,assign,resolve,email,remind"},
-      {"ixBug"=>"185", "operations"=>"edit,assign,resolve,email,remind"},
-      {"ixBug"=>"209", "operations"=>"edit,assign,resolve,email,remind"},
-      {"ixBug"=>"283", "operations"=>"edit,assign,resolve,email,remind"}
+    {"sTitle"=>"Server API", "sStatus"=>"Active",}
+      {"ixBug"=>"143", "sTitle" => "Write some ruby-fogbugz documentation", "sStatus => "active", operations"=>"edit,assign,resolve,email,remind"},
+      {"ixBug"=>"146", "sTitle" => "Tame a unicorn", "sStatus => "active", operations"=>"edit,assign,resolve,email,remind"},
+      {"ixBug"=>"152", "sTitle" => "Hug a walrus", "sStatus => "active", operations"=>"edit,assign,resolve,email,remind"},
     ], "count"=>"13"
   }
 }
