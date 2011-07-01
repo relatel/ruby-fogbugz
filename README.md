@@ -36,7 +36,7 @@ Returns your parsed XML:
       "operations"=>"edit,assign,resolve,email,remind"},
       {"ixBug"=>"152", "sTitle"=>"Hug a walrus", "sStatus"=>"active", 
       "operations"=>"edit,assign,resolve,email,remind"},
-    ], "count"=>"13"
+    ], "count"=>"3"
   }
 }
 ```
