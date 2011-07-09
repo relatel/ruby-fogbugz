@@ -15,6 +15,16 @@ class InitializationTest < FogTest
     assert_match /^#{@uri}/, f.uri
   end
 
+  test 'accepting email option' do
+    f = Fogbugz::Interface.new(@uri, :email => 'test@example.com')
+    assert_equal 'test@example.com', f.email
+  end
+
+  test 'accepting password option' do
+    f = Fogbugz::Interface.new(@uri, :password => 'test')
+    assert_equal 'test', f.password
+  end
+
   test 'accepting optional root path with leading path separator' do
     f = Fogbugz::Interface.new(@uri, :root => '/fogbugz')
     assert_match /^#{@uri}\/fogbugz\//, f.uri

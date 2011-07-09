@@ -4,7 +4,8 @@ module Fogbugz
   class InitializationError < StandardError; end
 
   class Interface
-    attr_accessor :token, :uri
+    attr_reader :uri
+    attr_accessor :token, :email, :password
     
     def initialize(uri, options = {})
       @uri = uri.to_s.chomp('/')
@@ -12,8 +13,8 @@ module Fogbugz
         :root => '/',
         :endpoint => 'api.asp'
       }
-      @root, @endpoint, @token = default.merge(options).
-        values_at(:root, :endpoint, :token)
+      @root, @endpoint, @token, @email, @password  = default.merge(options).
+        values_at(:root, :endpoint, :token, :email, :password)
       @uri = File.join(@uri, @root.gsub('/', ''), @endpoint.gsub('/', ''))
     end
 
