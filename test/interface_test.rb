@@ -1,61 +1,85 @@
 require 'test_helper.rb'
 
-class FogTest
-  CREDENTIALS = {
-    :email    => "test@test.com",
-    :password => 'seekrit',
-    :uri      => 'http://fogbugz.test.com'
-  }
+class InitializationTest < FogTest
+  def setup
+    @uri = 'http://fogbugz.example.com'
+  end
+
+  test 'initializing with uri' do
+    f = Fogbugz::Interface.new(@uri)
+    assert_match /^#{@uri}/, f.uri
+  end
+
+  test 'removing trailing path separator from uri' do
+    f = Fogbugz::Interface.new("#{@uri}/")
+    assert_match /^#{@uri}/, f.uri
+  end
+
+  test 'accepting optional root path with leading path separator' do
+    f = Fogbugz::Interface.new(@uri, :root => '/fogbugz')
+    assert_match /^#{@uri}\/fogbugz\//, f.uri
+  end
+
+  test 'accepting optional root path with trailing path separator' do
+    f = Fogbugz::Interface.new(@uri, :root => 'fogbugz/')
+    assert_match /^#{@uri}\/fogbugz\//, f.uri
+  end
+
+  test 'accepting optional root path no path separator' do
+    f = Fogbugz::Interface.new(@uri, :root => 'fogbugz')
+    assert_match /^#{@uri}\/fogbugz\//, f.uri
+  end
+
+  test 'accepting optional endpoint for api' do
+    f = Fogbugz::Interface.new(@uri, :endpoint => 'api.php')
+    assert_match /\/api\.php$/, f.uri
+  end
+
+  test 'acceptiong endpoint and root options' do
+    f = Fogbugz::Interface.new(@uri, :root => 'fogbugz', :endpoint => 'api.php')
+    assert_equal "#{@uri}/fogbugz/api.php", f.uri
+  end
+
+  test 'accepting auth token option' do
+    f = Fogbugz::Interface.new(@uri, :token => 'test')
+    assert_equal 'test', f.token
+  end
 end
 
-class BasicInterface < FogTest
+class AuthenticationTest < FogTest
   def setup
-    Fogbugz.adapter[:http] = mock()
-    Fogbugz.adapter[:http].expects(:new)
-
-    Fogbugz.adapter[:xml] = mock()
-
-    @fogbugz = Fogbugz::Interface.new(CREDENTIALS)
+    @uri = 'http://fogbugz.example.com'
+    @fogbugz = Fogbugz::Interface.new(@uri)
+    @credentials = { :email => 'test@example.com', :password => 'testpassword' }
+    @token = 'testtoken'
+    @fogbugz.expects(:command).with(:logon, @credentials).
+      returns 'token' => @token
   end
 
-  test 'when instantiating options should be overwriting and be publicly available' do
-    assert_equal CREDENTIALS, @fogbugz.options
+  test 'logon with given credentials' do
+    @fogbugz.logon @credentials
+    assert_equal @token, @fogbugz.token
+  end
+
+  test 'authentication with given credentials' do
+    @fogbugz.authenticate @credentials
+    assert_equal @token, @fogbugz.token
   end
 end
 
-class InterfaceRequests < FogTest
+class CommandTest < FogTest
   def setup
-    Fogbugz.adapter[:http].expects(:new)
+    @uri = 'http://fogbugz.example.com'
+    @token = 'token'
+    @fogbugz = Fogbugz::Interface.new(@uri, :token => @token)
   end
 
-  test 'authentication should send correct parameters' do
-
-    fogbugz = Fogbugz::Interface.new(CREDENTIALS)
-    fogbugz.http.expects(:request).with(:logon, 
-                                        :params => {
-                                          :email => CREDENTIALS[:email],
-                                          :password => CREDENTIALS[:password]
-                                        }).returns("token")
-
-    fogbugz.xml.expects(:parse).with("token").returns({"token" => "22"})
-
-    fogbugz.authenticate
-  end
-
-  test 'requesting with an action should send along token and correct parameters' do
-    fogbugz = Fogbugz::Interface.new(CREDENTIALS)
-    fogbugz.token = 'token'
-    fogbugz.http.expects(:request).with(:search, {:params => {:q => 'case', :token => 'token'}}).returns("omgxml")
-    fogbugz.xml.expects(:parse).with("omgxml")
-    fogbugz.command(:search, :q => 'case')
-  end
-
-  test 'throws an exception if #command is requested with no token' do
-    fogbugz = Fogbugz::Interface.new(CREDENTIALS)
-    fogbugz.token = nil
-
-    assert_raises Fogbugz::Interface::RequestError do
-      fogbugz.command(:search, :q => 'case')
-    end
+  test 'sending correct parameters with command' do
+    adapter = mock()
+    adapter.expects(:get).
+      with(:cmd => 'search', :token => @token, :q => 'case').
+      returns("<?xml version=\"1.0\"?><response><cases/></response>")
+    @fogbugz.stubs(:http_adapter).returns(adapter)
+    assert_equal({'cases' => nil}, @fogbugz.command(:search, :q => 'case'))
   end
 end

@@ -5,6 +5,14 @@ require 'ruby_fogbugz/interface'
 module Fogbugz
   class << self
     attr_accessor :adapter
+
+    def http_adapter(uri)
+      adapter[:http].new(uri)
+    end
+
+    def xml_adapter
+      adapter[:xml]
+    end
   end
 
   self.adapter = {
