@@ -25,6 +25,7 @@ module Fogbugz
     end
 
     def logon(params = {})
+      params = { :email => @email, :password => @password }.merge(params)
       @token = command(:logon, params)["token"]
     end
 

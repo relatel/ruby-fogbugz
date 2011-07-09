@@ -59,20 +59,37 @@ end
 class AuthenticationTest < FogTest
   def setup
     @uri = 'http://fogbugz.example.com'
-    @fogbugz = Fogbugz::Interface.new(@uri)
+    @new_credentials = { :email => 'test-2@example.com', :password => 'test' }
     @credentials = { :email => 'test@example.com', :password => 'testpassword' }
+    @fogbugz = Fogbugz::Interface.new(@uri, @credentials)
     @token = 'testtoken'
-    @fogbugz.expects(:command).with(:logon, @credentials).
-      returns 'token' => @token
   end
 
-  test 'logon with given credentials' do
-    @fogbugz.logon @credentials
+  test 'logon with provided credentials' do
+    @fogbugz.expects(:command).with(:logon, @new_credentials).
+      returns 'token' => @token
+    @fogbugz.logon @new_credentials
     assert_equal @token, @fogbugz.token
   end
 
-  test 'authentication with given credentials' do
-    @fogbugz.authenticate @credentials
+  test 'authenticate with provided credentials' do
+    @fogbugz.expects(:command).with(:logon, @new_credentials).
+      returns 'token' => @token
+    @fogbugz.logon @new_credentials
+    assert_equal @token, @fogbugz.token
+  end
+  
+  test 'logon with default credentials' do
+    @fogbugz.expects(:command).with(:logon, @credentials).
+      returns 'token' => @token
+    @fogbugz.logon
+    assert_equal @token, @fogbugz.token
+  end
+
+  test 'authentication with default credentials' do
+    @fogbugz.expects(:command).with(:logon, @credentials).
+      returns 'token' => @token
+    @fogbugz.authenticate
     assert_equal @token, @fogbugz.token
   end
 end
