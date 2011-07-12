@@ -26,4 +26,24 @@ class CommandTest < FogTest
     c.post!
     assert_equal :post, c.method
   end
+
+  test 'initializing with parameters' do
+    c = Fogbugz::Command.new @uri, :test => 'test'
+    assert_equal 'test', c[:test]
+  end
+
+  test 'adding parameter values' do
+    c = Fogbugz::Command.new @uri
+    c.test1 'test'
+    c.testTwo 'test2'
+    assert_equal 'test', c[:test1]
+    assert_equal 'test2', c[:testTwo]
+  end
+
+  test 'parameter chaining' do
+    c = Fogbugz::Command.new @uri
+    c.test('1').test2('2')
+    assert_equal '1', c[:test]
+    assert_equal '2', c[:test2]
+  end
 end  

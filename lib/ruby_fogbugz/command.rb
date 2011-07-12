@@ -1,8 +1,11 @@
+require 'hashie'
+
 module Fogbugz
-  class Command
+  class Command < Hashie::Clash
     attr_reader :uri, :method
     
-    def initialize(uri)
+    def initialize(uri, params={})
+      super(params)
       @uri = uri
       @method = :get
     end
