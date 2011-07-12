@@ -1,6 +1,7 @@
 require 'ruby_fogbugz/adapters/http/typhoeus'
 require 'ruby_fogbugz/adapters/xml/cracker'
 require 'ruby_fogbugz/interface'
+require 'ruby_fogbugz/command'
 
 module Fogbugz
   class << self
