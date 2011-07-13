@@ -17,7 +17,7 @@ module Fogbugz
     end
 
     def execute
-      xml_adapter.parse http_adapter.get(to_hash)
+      xml_adapter.parse http_adapter.send(@method, to_hash)
     end
 
     private
