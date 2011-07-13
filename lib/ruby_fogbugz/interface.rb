@@ -21,7 +21,7 @@ module Fogbugz
     def command(name, params = {})
       params = set_token(params)
       params.merge!(:cmd => name.to_s)
-      xml_adapter.parse(http_adapter.get(params))
+      Fogbugz::Command.new(@uri, params).execute
     end
 
     def logon(params = {})
@@ -35,14 +35,6 @@ module Fogbugz
     def set_token(params)
       params.merge! :token => @token if @token
       return params
-    end
-    
-    def http_adapter
-      Fogbugz.http_adapter(@uri)
-    end
-
-    def xml_adapter
-      Fogbugz.xml_adapter
     end
   end
 end

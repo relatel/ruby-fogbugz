@@ -102,11 +102,11 @@ class CommandTest < FogTest
   end
 
   test 'sending correct parameters with command' do
-    adapter = mock()
-    adapter.expects(:get).
-      with(:cmd => 'search', :token => @token, :q => 'case').
-      returns("<?xml version=\"1.0\"?><response><cases/></response>")
-    @fogbugz.stubs(:http_adapter).returns(adapter)
-    assert_equal({'cases' => nil}, @fogbugz.command(:search, :q => 'case'))
+    command = mock()
+    command.expects(:execute).returns('test' => 'test')
+    Fogbugz::Command.expects(:new).
+      with(@fogbugz.uri, { :cmd => 'search', :q => 'case', :token => @token }).
+      returns(command)
+    assert_equal({'test' => 'test'}, @fogbugz.command(:search, :q => 'case'))
   end
 end
