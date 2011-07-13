@@ -1,38 +1,42 @@
 module Fogbugz
+  
+  class RequestError < StandardError; end
+  class InitializationError < StandardError; end
+
   class Interface
-    class RequestError < StandardError; end
-    class InitializationError < StandardError; end
+    attr_reader :uri
+    attr_accessor :token, :email, :password
     
-    attr_accessor :options, :http, :xml, :token
-
-    def initialize(options = {})
-      @options = {}.merge(options)
-
-      raise InitializationError, "Must supply URI (e.g. https://fogbugz.company.com)" unless options[:uri]
-      @http = Fogbugz.adapter[:http].new(:uri => options[:uri])
-      @xml = Fogbugz.adapter[:xml]
+    def initialize(uri, options = {})
+      @uri = uri.to_s.chomp('/')
+      default = {
+        :root => '/',
+        :endpoint => 'api.asp'
+      }
+      @root, @endpoint, @token, @email, @password  = default.merge(options).
+        values_at(:root, :endpoint, :token, :email, :password)
+      @uri = File.join(@uri, @root.gsub('/', ''), @endpoint.gsub('/', ''))
     end
 
-    def authenticate
-      response = @http.request :logon, { 
-        :params => {
-          :email    => @options[:email],
-          :password => @options[:password]
-        }
-      }
-
-      @token ||= @xml.parse(response)["token"]
+    def command(name, params = {}, &block)
+      params = set_token(params)
+      params.merge!(:cmd => name.to_s)
+      command = Fogbugz::Command.new(@uri, params)
+      yield command if block_given?
+      command.execute
     end
 
-    def command(action, parameters = {})
-      raise RequestError, 'No token available, #authenticate first' unless @token
-      parameters[:token] = @token
+    def logon(params = {})
+      params = { :email => @email, :password => @password }.merge(params)
+      @token = command(:logon, params)["token"]
+    end
 
-      response = @http.request action, { 
-        :params => parameters.merge(options[:params] || {})
-      }
-
-      @xml.parse(response)
+    alias :authenticate :logon
+    
+    private
+    def set_token(params)
+      params.merge! :token => @token if @token
+      return params
     end
   end
 end

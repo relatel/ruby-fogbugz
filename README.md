@@ -52,9 +52,21 @@ require 'rubygems'
 require 'fogbugz'
 require 'pp'
 
-fogbugz = Fogbugz::Interface.new(:email => 'my@email.com', :password => 'seekrit', :uri => 'https://company.fogbugz.com') # remember to use https!
+fogbugz = Fogbugz::Interface.new('https://company.fogbugz.com', :email => 'my@email.com', :password => 'seekrit') # remember to use https!
 fogbugz.authenticate # token is not automatically attached to every future requests
 pp fogbugz.command(:listPeople)
+```
+The ruby-fogbugz instance yields commands to a block passed to the
+method.  This allows you to set additional parameters and/or send the
+request via the post method.
+
+```ruby
+fogbugz = Fogbugz::Interface.new('https://company.fogbugz.com', :token
+=> 'mytoken')
+resp = fogbugz.command(:listFixFors) do |c|
+  c.fIncludeDeleted 1
+  c.post!
+end
 ```
 
 [fad]:http://fogbugz.stackexchange.com/fogbugz-xml-api
