@@ -56,4 +56,15 @@ class CommandTest < FogTest
     c.stubs(:http_adapter).returns(adapter)
     assert_equal({'test' => 'test resp'}, c.execute)
   end
+
+  test 'executing command via explicit get' do
+    adapter = mock
+    adapter.expects(:get).
+      with(:test => 'test').
+      returns("<?xml version=\"1.0\"?><response><test>test resp</test></response>")
+    c = Fogbugz::Command.new @uri, :test => 'test'
+    c.get!
+    c.stubs(:http_adapter).returns(adapter)
+    assert_equal({"test" => 'test resp'}, c.execute)
+  end
 end  
