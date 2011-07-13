@@ -109,4 +109,16 @@ class CommandTest < FogTest
       returns(command)
     assert_equal({'test' => 'test'}, @fogbugz.command(:search, :q => 'case'))
   end
+
+  test 'yielding command to block' do
+    command = mock()
+    command.expects(:test).with('test')
+    command.expects(:execute).returns(:test => 'test')
+    Fogbugz::Command.expects(:new).
+      with(@fogbugz.uri, :cmd => 'search', :token => @token).returns(command)
+    resp = @fogbugz.command(:search) do |c|
+      c.test 'test'
+    end
+    assert_equal resp[:test], 'test'
+  end
 end

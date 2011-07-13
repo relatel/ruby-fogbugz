@@ -18,10 +18,12 @@ module Fogbugz
       @uri = File.join(@uri, @root.gsub('/', ''), @endpoint.gsub('/', ''))
     end
 
-    def command(name, params = {})
+    def command(name, params = {}, &block)
       params = set_token(params)
       params.merge!(:cmd => name.to_s)
-      Fogbugz::Command.new(@uri, params).execute
+      command = Fogbugz::Command.new(@uri, params)
+      yield command if block_given?
+      command.execute
     end
 
     def logon(params = {})
