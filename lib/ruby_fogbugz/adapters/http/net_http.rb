@@ -16,7 +16,6 @@ module Fogbugz
           # query = @requester.get("#{uri}/api.asp", :params => params)
           options_string = options[:params].map{ |k,v| "#{k}=#{v}"}.join('&')
           url_string = "#{@uri}/api.asp?cmd=#{action}&#{options_string}"
-          debugger
           url = URI.parse(url_string)
           # request = Net::HTTP::Get.new(url.path, {"Content-Type"=>"text/xml"})
           request = Net::HTTP::Get.new(url_string, {"Content-Type"=>"text/xml"})
