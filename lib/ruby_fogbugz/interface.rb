@@ -20,8 +20,17 @@ module Fogbugz
           :password => @options[:password]
         }
       }
-
-      @token ||= @xml.parse(response)["token"]
+      begin
+        @token ||= @xml.parse(response)["token"]
+        if @token.nil? || @token == ''
+          throw Fogbugz::AuthenticationException.new(@xml.parse(response)["error"])
+        end
+      rescue REXML::ParseException => e
+        # Probably an issue with the auth information
+        p response
+        throw Fogbugz::AuthenticationException.new("Looks like there was an issue with authentication - probably the host/url.")
+      end
+      @token
     end
 
     def command(action, parameters = {})
@@ -34,5 +43,8 @@ module Fogbugz
 
       @xml.parse(response)
     end
+  end
+  
+  class AuthenticationException < Exception
   end
 end
