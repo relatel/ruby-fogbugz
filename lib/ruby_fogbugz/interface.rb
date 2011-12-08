@@ -27,8 +27,8 @@ module Fogbugz
         end
       rescue REXML::ParseException => e
         # Probably an issue with the auth information
-        p response
-        throw Fogbugz::AuthenticationException.new("Looks like there was an issue with authentication - probably the host/url.")
+        # p response
+        throw Fogbugz::AuthenticationException.new("Looks like there was an issue with authentication (to #{@options[:uri]} as #{@options[:email]}) - probably the host/url.")
       end
       @token
     end
