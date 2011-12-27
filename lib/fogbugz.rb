@@ -1,4 +1,4 @@
-require 'ruby_fogbugz/adapters/http/typhoeus'
+require 'ruby_fogbugz/adapters/http/net_http'
 require 'ruby_fogbugz/adapters/xml/cracker'
 require 'ruby_fogbugz/interface'
 
@@ -9,6 +9,6 @@ module Fogbugz
 
   self.adapter = {
     :xml  => Adapter::XML::Cracker,
-    :http => Adapter::HTTP::Typhoeuser
+    :http => Adapter::HTTP::NetHttp
   }
 end
