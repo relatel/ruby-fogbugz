@@ -9,6 +9,7 @@ module Fogbugz
       @options = {}.merge(options)
 
       raise InitializationError, "Must supply URI (e.g. https://fogbugz.company.com)" unless options[:uri]
+      @token = options[:token] if options[:token]
       @http = Fogbugz.adapter[:http].new(:uri => options[:uri])
       @xml = Fogbugz.adapter[:xml]
     end
