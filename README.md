@@ -48,13 +48,29 @@ As you see, `ruby-fogbugz` is without magic and leaves most to the user.
 All Fogbugz API requests require a token. Thus `#authenticate` must be called on the `ruby-fogbugz` instance before `#command`'s are sent:
 
 ```ruby
-require 'rubygems'
 require 'fogbugz'
-require 'pp'
 
 fogbugz = Fogbugz::Interface.new(:email => 'my@email.com', :password => 'seekrit', :uri => 'https://company.fogbugz.com') # remember to use https!
-fogbugz.authenticate # token is not automatically attached to every future requests
-pp fogbugz.command(:listPeople)
+fogbugz.authenticate # token is now automatically attached to every future requests
+p fogbugz.command(:listPeople)
+```
+
+`#authenticate` fetches a new token every time. To avoid the extra request,
+obtain a token:
+
+```ruby
+require 'fogbugz'
+
+fogbugz = Fogbugz::Interface.new(:email => 'my@email.com', :password => 'seekrit', :uri => 'https://company.fogbugz.com') # remember to use https!
+fogbugz.authenticate # token is now automatically attached to every future requests
+
+puts "Token: #{fogbugz.token}"
+```
+
+Run the script, and initialize with the returned token:
+
+```ruby
+fogbugz = Fogbugz::Interface.new(:token => "some token to use from now on", :email => 'my@email.com', :password => 'seekrit', :uri => 'https://company.fogbugz.com') # remember to use https!
 ```
 
 [fad]:http://fogbugz.stackexchange.com/fogbugz-xml-api
