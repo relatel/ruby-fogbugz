@@ -70,7 +70,7 @@ puts "Token: #{fogbugz.token}"
 Run the script, and initialize with the returned token:
 
 ```ruby
-fogbugz = Fogbugz::Interface.new(:token => "some token to use from now on", :email => 'my@email.com', :password => 'seekrit', :uri => 'https://company.fogbugz.com') # remember to use https!
+fogbugz = Fogbugz::Interface.new(:token => "some token to use from now on", :uri => 'https://company.fogbugz.com') # remember to use https!
 ```
 
 [fad]:http://fogbugz.stackexchange.com/fogbugz-xml-api
