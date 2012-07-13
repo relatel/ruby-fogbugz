@@ -24,12 +24,12 @@ module Fogbugz
       begin
         @token ||= @xml.parse(response)["token"]
         if @token.nil? || @token == ''
-          throw Fogbugz::AuthenticationException.new(@xml.parse(response)["error"])
+          raise Fogbugz::AuthenticationException.new(@xml.parse(response)["error"])
         end
       rescue REXML::ParseException => e
         # Probably an issue with the auth information
         # p response
-        throw Fogbugz::AuthenticationException.new("Looks like there was an issue with authentication (to #{@options[:uri]} as #{@options[:email]}) - probably the host/url.")
+        raise Fogbugz::AuthenticationException.new("Looks like there was an issue with authentication (to #{@options[:uri]} as #{@options[:email]}) - probably the host/url.")
       end
       @token
     end
