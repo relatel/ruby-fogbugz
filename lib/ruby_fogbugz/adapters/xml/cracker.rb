@@ -1,3 +1,4 @@
+require 'crack/util'
 require 'crack/xml'
 
 module Fogbugz
