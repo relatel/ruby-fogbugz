@@ -12,4 +12,15 @@ class Cracker < FogTest
 
     assert_equal({"version" => "2"}, Fogbugz::Adapter::XML::Cracker.parse(XML))
   end
+
+  # Sometimes Fogbugz returns responses like this
+  test 'should return nil when the response is not valid' do
+    XML = <<-xml
+      <html><head><title>Object moved</title></head><body>
+      <h2>Object moved to <a href="http://example.fogbugz.com:84/internalError.asp?aspxerrorpath=/api.asp">here</a>.</h2>
+      </body></html>
+    xml
+
+    assert_equal(nil, Fogbugz::Adapter::XML::Cracker.parse(XML))
+  end
 end
