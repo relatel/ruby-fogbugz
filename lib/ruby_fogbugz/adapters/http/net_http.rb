@@ -20,7 +20,7 @@ module Fogbugz
           params.merge!(options[:params])
 
           # build up the form request
-          request = Net::HTTP::Post.new(uri)
+          request = Net::HTTP::Post.new(uri.request_uri)
           request.set_form_data(params)
 
           http = Net::HTTP.new(uri.host, uri.port)
