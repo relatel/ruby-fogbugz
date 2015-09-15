@@ -1,3 +1,6 @@
+require 'codeclimate-test-reporter'
+CodeClimate::TestReporter.start
+
 require 'rubygems'
 gem 'minitest' # ensures you're using the gem, and not the built in MT
 $: << File.expand_path(File.dirname(__FILE__) + "../lib")

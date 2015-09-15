@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/firmafon/ruby-fogbugz.svg)](https://travis-ci.org/firmafon/ruby-fogbugz)
+[![Code Climate](https://codeclimate.com/github/firmafon/ruby-fogbugz/badges/gpa.svg)](https://codeclimate.com/github/firmafon/ruby-fogbugz)
+[![Test Coverage](https://codeclimate.com/github/firmafon/ruby-fogbugz/badges/coverage.svg)](https://codeclimate.com/github/firmafon/ruby-fogbugz/coverage)
 
 # ruby-fogbugz
 
