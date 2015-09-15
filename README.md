@@ -1,6 +1,14 @@
-[![Build Status](https://travis-ci.org/firmafon/ruby-fogbugz.svg)](https://travis-ci.org/firmafon/ruby-fogbugz)
-[![Code Climate](https://codeclimate.com/github/firmafon/ruby-fogbugz/badges/gpa.svg)](https://codeclimate.com/github/firmafon/ruby-fogbugz)
-[![Test Coverage](https://codeclimate.com/github/firmafon/ruby-fogbugz/badges/coverage.svg)](https://codeclimate.com/github/firmafon/ruby-fogbugz/coverage)
+[![Gem Version](https://img.shields.io/gem/v/ruby-fogbugz.svg)][gem]
+[![Build Status](https://img.shields.io/travis/firmafon/ruby-fogbugz.svg)][travis]
+[![Dependency Status](https://img.shields.io/gemnasium/firmafon/ruby-fogbugz.svg)][gemnasium]
+[![Code Climate](https://img.shields.io/codeclimate/github/firmafon/ruby-fogbugz.svg)][codeclimate]
+[![Test Coverage](https://img.shields.io/codeclimate/coverage/github/firmafon/ruby-fogbugz.svg)][coverage]
+
+[gem]: https://rubygems.org/gems/ruby-fogbugz
+[travis]: https://travis-ci.org/firmafon/ruby-fogbugz
+[gemnasium]: https://gemnasium.com/firmafon/ruby-fogbugz
+[codeclimate]: https://codeclimate.com/github/firmafon/ruby-fogbugz
+[coverage]: https://codeclimate.com/github/firmafon/ruby-fogbugz/coverage
 
 # ruby-fogbugz
 
