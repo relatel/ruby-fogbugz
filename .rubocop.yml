@@ -1,0 +1,11 @@
+Style/Documentation:
+  Enabled: false
+
+Style/SignalException:
+  Enabled: false
+
+Metrics/LineLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false

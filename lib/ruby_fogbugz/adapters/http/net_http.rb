@@ -14,9 +14,7 @@ module Fogbugz
         def request(action, options)
           uri = URI("#{@root_url}/api.asp")
 
-          params = {
-            'cmd' => action
-          }
+          params = { 'cmd' => action }
           params.merge!(options[:params])
 
           # build up the form request
@@ -25,8 +23,8 @@ module Fogbugz
 
           http = Net::HTTP.new(uri.host, uri.port)
           http.use_ssl = @root_url.start_with? 'https'
-          
-          response = http.start {|http| http.request(request) }
+
+          response = http.start { |h| h.request(request) }
           response.body
         end
       end

@@ -6,7 +6,7 @@ module Fogbugz
     module XML
       class Cracker
         def self.parse(xml)
-          Crack::XML.parse(xml)["response"]
+          Crack::XML.parse(xml)['response']
         end
       end
     end

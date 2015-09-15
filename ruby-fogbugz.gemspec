@@ -1,19 +1,19 @@
 # -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
-require "ruby_fogbugz/version"
+$LOAD_PATH.push File.expand_path('../lib', __FILE__)
+require 'ruby_fogbugz/version'
 
 Gem::Specification.new do |s|
-  s.name        = "ruby-fogbugz"
+  s.name        = 'ruby-fogbugz'
   s.version     = Fogbugz::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Simon Hørup Eskildsen', 'Jared Szechy']
   s.email       = ['sirup@sirupsen.com', 'jared.szechy@gmail.com']
   s.homepage    = 'https://github.com/firmafon/ruby-fogbugz'
-  s.summary     = %q{Ruby wrapper for the Fogbugz API }
-  s.description = %q{A simple Ruby wrapper for the Fogbugz XML API}
+  s.summary     = 'Ruby wrapper for the Fogbugz API'
+  s.description = 'A simple Ruby wrapper for the Fogbugz XML API'
   s.license     = 'MIT'
 
-  s.rubyforge_project = "ruby-fogbugz"
+  s.rubyforge_project = 'ruby-fogbugz'
 
   s.add_dependency 'crack', '~> 0.4'
 
@@ -22,8 +22,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'mocha', '~> 1.1'
   s.add_development_dependency 'codeclimate-test-reporter'
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  s.require_paths = ["lib"]
+  s.files         = `git ls-files`.split('\n')
+  s.test_files    = `git ls-files -- {test,spec,features}/*`.split('\n')
+  s.executables   = `git ls-files -- bin/*`.split('\n').map { |f| File.basename(f) }
+  s.require_paths = ['lib']
 end
