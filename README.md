@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/firmafon/ruby-fogbugz.svg)](https://travis-ci.org/firmafon/ruby-fogbugz)
+
 # ruby-fogbugz
 
 A very simple wrapper for the Fogbugz API. It won't give you fancy classes for everything, it'll simply aid you in sending the API requests, parsing the returned XML finally retuning you a Hash.
