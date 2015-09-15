@@ -10,11 +10,6 @@ end
 
 class BasicInterface < FogTest
   def setup
-    Fogbugz.adapter[:http] = mock()
-    Fogbugz.adapter[:http].expects(:new)
-
-    Fogbugz.adapter[:xml] = mock()
-
     @fogbugz = Fogbugz::Interface.new(CREDENTIALS)
   end
 
@@ -25,11 +20,11 @@ end
 
 class InterfaceRequests < FogTest
   def setup
-    Fogbugz.adapter[:http].expects(:new)
+    #Fogbugz.adapter[:http] = mock()
+    #Fogbugz.adapter[:http].expects(:new)
   end
 
   test 'authentication should send correct parameters' do
-
     fogbugz = Fogbugz::Interface.new(CREDENTIALS)
     fogbugz.http.expects(:request).with(:logon, 
                                         :params => {

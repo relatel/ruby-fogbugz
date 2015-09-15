@@ -4,7 +4,7 @@ $: << File.expand_path(File.dirname(__FILE__) + "../lib")
 
 require 'minitest/autorun'
 require 'minitest/pride'
-require 'mocha'
+require 'mocha/mini_test'
 
 require 'fogbugz'
 

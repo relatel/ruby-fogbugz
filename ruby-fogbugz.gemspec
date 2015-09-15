@@ -14,9 +14,9 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "ruby-fogbugz"
 
-  # s.add_dependency('typhoeus')
   s.add_dependency('crack')
 
+  s.add_development_dependency('rake')
   s.add_development_dependency('minitest')
   s.add_development_dependency('mocha')
 
