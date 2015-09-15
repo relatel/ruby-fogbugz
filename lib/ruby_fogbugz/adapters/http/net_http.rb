@@ -12,15 +12,18 @@ module Fogbugz
         end
 
         def request(action, options)
-          # Convert the hash key/values to key=value&key2=value2 strings - CGI escaping along the way
-          options_string = options[:params].map{ |k, v| "#{CGI.escape(k.to_s)}=#{CGI.escape(v.to_s)}"}.join('&')
-          
-          url_string = "#{@root_url}/api.asp?cmd=#{action}&#{options_string}"
-          url = URI.parse(url_string)
-          
-          request = Net::HTTP::Get.new(url_string, {"Content-Type"=>"text/xml"})
-          
-          http = Net::HTTP.new(url.host, url.port)
+          uri = URI("#{@root_url}/api.asp")
+
+          params = {
+            'cmd' => action
+          }
+          params.merge!(options[:params])
+
+          # build up the form request
+          request = Net::HTTP::Post.new(uri.request_uri)
+          request.set_form_data(params)
+
+          http = Net::HTTP.new(uri.host, uri.port)
           http.use_ssl = @root_url.start_with? 'https'
           
           response = http.start {|http| http.request(request) }
