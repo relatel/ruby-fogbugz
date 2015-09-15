@@ -11,15 +11,16 @@ Gem::Specification.new do |s|
   s.homepage    = ""
   s.summary     = %q{Ruby wrapper for the Fogbugz API }
   s.description = %q{A simple Ruby wrapper for the Fogbugz XML API}
+  s.license     = 'MIT'
 
   s.rubyforge_project = "ruby-fogbugz"
 
-  s.add_dependency('crack')
+  s.add_dependency 'crack', '~> 0.4'
 
-  s.add_development_dependency('rake')
-  s.add_development_dependency('minitest')
-  s.add_development_dependency('mocha')
-  s.add_development_dependency('codeclimate-test-reporter')
+  s.add_development_dependency 'rake'
+  s.add_development_dependency 'minitest', '~> 5.8'
+  s.add_development_dependency 'mocha', '~> 1.1'
+  s.add_development_dependency 'codeclimate-test-reporter'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
