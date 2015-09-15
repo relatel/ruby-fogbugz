@@ -4,3 +4,7 @@ rvm:
   - 2.1.7
   - 2.2.3
   - jruby-9.0.1.0
+
+addons:
+  code_climate:
+    repo_token: ef52b4659b14e65b70be219cf870eaffcef8ee9c260b767b26694e2c7f59e88c

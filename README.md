@@ -6,16 +6,23 @@
 
 A very simple wrapper for the Fogbugz API. It won't give you fancy classes for everything, it'll simply aid you in sending the API requests, parsing the returned XML finally retuning you a Hash.
 
-# Installation
+## Installation
 
-    gem install ruby-fogbugz
+Add this line to your application's Gemfile:
 
 ```ruby
-["mri-1.9,2", "mri-1.8.7", "rbx-1.2.4", "rbx-2.0.0", "jruby-1.6.2"].all? { |implementation| implementation.works? }
-# => true
+gem 'ruby-fogbugz'
 ```
 
-# Usage
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install ruby-fogbugz
+
+## Usage
 
 The Fogbugz API works by sending HTTP GET parameters to the API where the GET parameter `cmd` invokes a Fogbugz method, e.g. `cmd=listProjects` to get a list of all projects, `cmd`s then accept further arguments, such as listing all cases assigned to a specific person:
 
@@ -34,11 +41,11 @@ Returns your parsed XML:
   "description"=>"All open cases assigned to Simon Eskildsen",
   "cases" => {
     "case"=> [
-      {"ixBug"=>"143", "sTitle"=>"Write ruby-fogbugz documentation", 
+      {"ixBug"=>"143", "sTitle"=>"Write ruby-fogbugz documentation",
       "sStatus"=>"active", "operations"=>"edit,assign,resolve,email,remind"},
-      {"ixBug"=>"146", "sTitle"=>"Tame a unicorn", "sStatus"=>"active", 
+      {"ixBug"=>"146", "sTitle"=>"Tame a unicorn", "sStatus"=>"active",
       "operations"=>"edit,assign,resolve,email,remind"},
-      {"ixBug"=>"152", "sTitle"=>"Hug a walrus", "sStatus"=>"active", 
+      {"ixBug"=>"152", "sTitle"=>"Hug a walrus", "sStatus"=>"active",
       "operations"=>"edit,assign,resolve,email,remind"},
     ], "count"=>"3"
   }
@@ -79,6 +86,6 @@ fogbugz = Fogbugz::Interface.new(:token => "some token to use from now on", :uri
 
 [fad]:http://fogbugz.stackexchange.com/fogbugz-xml-api
 
-# License
+## License
 
 `ruby-fogbugz` is released under the MIT license.
