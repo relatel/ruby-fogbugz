@@ -6,9 +6,9 @@ Gem::Specification.new do |s|
   s.name        = "ruby-fogbugz"
   s.version     = Fogbugz::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Simon Hørup Eskildsen"]
-  s.email       = ["sirup@sirupsen.com"]
-  s.homepage    = ""
+  s.authors     = ['Simon Hørup Eskildsen', 'Jared Szechy']
+  s.email       = ['sirup@sirupsen.com', 'jared.szechy@gmail.com']
+  s.homepage    = 'https://github.com/firmafon/ruby-fogbugz'
   s.summary     = %q{Ruby wrapper for the Fogbugz API }
   s.description = %q{A simple Ruby wrapper for the Fogbugz XML API}
   s.license     = 'MIT'
@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'crack', '~> 0.4'
 
-  s.add_development_dependency 'rake'
+  s.add_development_dependency 'rake', '~> 10.1'
   s.add_development_dependency 'minitest', '~> 5.8'
   s.add_development_dependency 'mocha', '~> 1.1'
   s.add_development_dependency 'codeclimate-test-reporter'
