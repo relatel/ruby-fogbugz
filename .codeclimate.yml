@@ -5,3 +5,7 @@ engines:
     enabled: true
   fixme:
     enabled: true
+ratings:
+  paths:
+    - "lib/**"
+    - "**.rb"
