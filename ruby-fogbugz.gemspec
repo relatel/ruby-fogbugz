@@ -18,8 +18,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'crack', '~> 0.4'
 
   s.add_development_dependency 'rake', '~> 10.1'
-  s.add_development_dependency 'minitest', '~> 5.8'
-  s.add_development_dependency 'mocha', '~> 1.1'
+  s.add_development_dependency 'webmock', '~> 1.21'
+  s.add_development_dependency 'rspec', '~> 3.3'
   s.add_development_dependency 'codeclimate-test-reporter'
 
   s.files         = `git ls-files`.split('\n')
