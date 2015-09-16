@@ -6,6 +6,9 @@ class FogTest
     password: 'seekrit',
     uri:      'http://fogbugz.test.com'
   }
+
+  VALID_AUTH = '<?xml version="1.0" encoding="UTF-8"?><response><token><![CDATA[abcdefabcdefabcdefabcdefabcdef]]></token></response>'
+  INVALID_AUTH = '<?xml version="1.0" encoding="UTF-8"?><response><error code="1"><![CDATA[Incorrect password or username]]></error></response>'
 end
 
 class BasicInterface < FogTest
@@ -25,11 +28,34 @@ class InterfaceRequests < FogTest
                                         params: {
                                           email: CREDENTIALS[:email],
                                           password: CREDENTIALS[:password]
-                                        }).returns('token')
-
-    fogbugz.xml.expects(:parse).with('token').returns('token' => '22')
-
+                                        }).returns(VALID_AUTH)
     fogbugz.authenticate
+  end
+
+  test 'invalid authentication throws exception' do
+    fogbugz = Fogbugz::Interface.new(CREDENTIALS)
+    fogbugz.http.expects(:request).with(:logon,
+                                        params: {
+                                          email: CREDENTIALS[:email],
+                                          password: CREDENTIALS[:password]
+                                        }).returns(INVALID_AUTH)
+
+    assert_raises Fogbugz::AuthenticationException do
+      fogbugz.authenticate
+    end
+  end
+
+  test 'invalid XML response throws exception' do
+    fogbugz = Fogbugz::Interface.new(CREDENTIALS)
+    fogbugz.http.expects(:request).with(:logon,
+                                        params: {
+                                          email: CREDENTIALS[:email],
+                                          password: CREDENTIALS[:password]
+                                        }).returns('<html></head>')
+
+    assert_raises Fogbugz::AuthenticationException do
+      fogbugz.authenticate
+    end
   end
 
   test 'requesting with an action should send along token and correct parameters' do
