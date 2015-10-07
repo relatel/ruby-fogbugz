@@ -12,19 +12,21 @@ module Fogbugz
           @root_url = options[:uri]
         end
 
+        def build_request(uri, params)
+          return Net::HTTP::Post::Multipart.new(uri.request_uri, params) if params.key? :File1
+
+          request = Net::HTTP::Post.new(uri.request_uri)
+          request.set_form_data(params)
+          request
+        end
+
         def request(action, options)
           uri = URI("#{@root_url}/api.asp")
 
           params = { 'cmd' => action }
           params.merge!(options[:params])
 
-          # build up the form request
-          if params.key? :File1
-            request = Net::HTTP::Post::Multipart.new(uri.request_uri, params)
-          else
-            request = Net::HTTP::Post.new(uri.request_uri)
-            request.set_form_data(params)
-          end
+          request = build_request(uri, params)
 
           http = Net::HTTP.new(uri.host, uri.port)
           http.use_ssl = @root_url.start_with? 'https'
