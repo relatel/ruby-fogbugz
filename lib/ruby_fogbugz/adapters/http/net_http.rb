@@ -1,5 +1,6 @@
 require 'cgi'
 require 'net/https'
+require 'net/http/post/multipart'
 
 module Fogbugz
   module Adapter
@@ -18,8 +19,12 @@ module Fogbugz
           params.merge!(options[:params])
 
           # build up the form request
-          request = Net::HTTP::Post.new(uri.request_uri)
-          request.set_form_data(params)
+          if params.key? :File1
+            request = Net::HTTP::Post::Multipart.new(uri.request_uri, params)
+          else
+            request = Net::HTTP::Post.new(uri.request_uri)
+            request.set_form_data(params)
+          end
 
           http = Net::HTTP.new(uri.host, uri.port)
           http.use_ssl = @root_url.start_with? 'https'
