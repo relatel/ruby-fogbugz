@@ -10,7 +10,7 @@ module Fogbugz
 
       raise InitializationError, 'Must supply URI (e.g. https://fogbugz.company.com)' unless options[:uri]
       @token = options[:token] if options[:token]
-      @http = Fogbugz.adapter[:http].new(uri: options[:uri])
+      @http = Fogbugz.adapter[:http].new(uri: options[:uri], ca_file: options[:ca_file])
       @xml = Fogbugz.adapter[:xml]
     end
 
