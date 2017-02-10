@@ -92,7 +92,16 @@ Run the script, and initialize with the returned token:
 fogbugz = Fogbugz::Interface.new(:token => "some token to use from now on", :uri => 'https://company.fogbugz.com') # remember to use https!
 ```
 
+### Attachments
+
+This library supports multipart file uploads to include attachments in your API request. A multipart request body is created (using the [multipart-post][mpp] gem) if `File1` is found in the command parameters. Files can be attached as follows:
+
+```ruby
+fogbugz.command(:new, sProject: "SomeProject", sArea: "someArea", sTitle: "Case title", File1: UploadIO.new(f, "text/plain", "someFile.rb"))
+```
+
 [fad]:http://fogbugz.stackexchange.com/fogbugz-xml-api
+[mpp]:https://github.com/nicksieger/multipart-post
 
 ## License
 

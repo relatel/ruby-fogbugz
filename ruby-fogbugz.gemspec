@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project = 'ruby-fogbugz'
 
   s.add_dependency 'crack', '~> 0.4'
+  s.add_dependency 'multipart-post', '~> 2.0'
 
   s.add_development_dependency 'rake', '~> 10.1'
   s.add_development_dependency 'webmock', '~> 1.21'
