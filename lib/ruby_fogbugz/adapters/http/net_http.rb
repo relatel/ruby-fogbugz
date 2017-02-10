@@ -10,6 +10,7 @@ module Fogbugz
 
         def initialize(options = {})
           @root_url = options[:uri]
+          @ca_file = options[:ca_file]
         end
 
         def build_request(uri, params)
@@ -29,7 +30,10 @@ module Fogbugz
           request = build_request(uri, params)
 
           http = Net::HTTP.new(uri.host, uri.port)
-          http.use_ssl = @root_url.start_with? 'https'
+          if @root_url.start_with? 'https'
+            http.use_ssl = true
+            http.ca_file = @ca_file
+          end
 
           response = http.start { |h| h.request(request) }
           response.body
